@@ -139,5 +139,47 @@ dist
 
 # Vite files
 vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
 .vite/
+
+# Local Cloudflare and D1 state
+.wrangler/
+.dev.vars
+.dev.vars.*
+wrangler.local.json
+wrangler.local.jsonc
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*Zone.Identifier*
+
+# Temporary files
+tmp/
+temp/
+.cache/
+*.tmp
+
+node_modules/
+dist/
+.sites-runtime/
+.vscode/
