@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, BookOpen, Check, ChevronRight, CircleDashed, GitBranch, Link2, Menu, Plus, Search, ShieldAlert, X } from "lucide-react";
+import { AuthControl } from "@/components/auth-control";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -32,7 +33,7 @@ export default function Home() {
   const [notice, setNotice] = useState("");
 
   useEffect(() => {
-    fetch("/api/claims").then((r) => r.ok ? r.json() : Promise.reject()).then((data: { claims?: Claim[] }) => {
+    fetch("/api/claims").then((r) => r.ok ? r.json() as Promise<{ claims?: Claim[] }> : Promise.reject()).then((data) => {
       if (data.claims?.length) { setClaims(data.claims); setSelectedId(data.claims[0].id); }
     }).catch(() => undefined);
   }, []);
@@ -94,7 +95,7 @@ export default function Home() {
     <header className="sticky top-0 z-30 flex h-16 items-center border-b border-white/10 bg-[#080b10]/95 px-4 backdrop-blur sm:px-6">
       <button className="mr-3 md:hidden" aria-label="Open navigation" onClick={() => setMenuOpen(!menuOpen)}><Menu className="size-5" /></button>
       <div className="flex items-center gap-3 font-semibold tracking-tight"><span className="grid size-8 place-items-center rounded-lg border border-cyan-400/30 bg-cyan-400/10 text-cyan-300"><GitBranch className="size-4" /></span>Lemmina</div>
-      <div className="ml-auto hidden items-center gap-2 text-sm text-slate-400 sm:flex"><span className="size-2 rounded-full bg-emerald-400" /> Research saved</div>
+      <div className="ml-auto flex items-center gap-3"><div className="hidden items-center gap-2 text-sm text-slate-400 sm:flex"><span className="size-2 rounded-full bg-emerald-400" /> Research saved</div><AuthControl /></div>
     </header>
 
     <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-[1600px] grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] xl:grid-cols-[220px_minmax(0,1fr)_320px]">
